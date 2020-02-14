@@ -1,10 +1,13 @@
 package rafista.intencje.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.UUID;
 
 @Entity
+@Data
 @Table(name = "INTENTION")
 public class Intention {
 
@@ -19,7 +22,8 @@ public class Intention {
     @Column(name = "DATE")
     private Timestamp date;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     public Intention(String text, Timestamp date, User user) {
