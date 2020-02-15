@@ -26,7 +26,6 @@ public class CustomerController {
     }
 
    @PostMapping(produces = "application/json")
-   @ResponseBody
     public Customer addUser(@RequestBody Customer user){
         Customer customer = customerService.save(user);
         if (customer!=null)

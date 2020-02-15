@@ -6,6 +6,7 @@ import rafista.intencje.model.Intention;
 import rafista.intencje.repository.IntentionRepository;
 import rafista.intencje.serviceInterface.IntentionServiceInterface;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,12 +30,37 @@ public class IntentionService implements IntentionServiceInterface {
     }
 
     @Override
+    public Intention edit(UUID id, Intention intention) {
+        Optional<Intention> intentionFind = intentionRepository.findById(id);
+        Intention intentionObj = null;
+        if(intentionFind.isPresent()){
+            intentionObj = intentionFind.get();
+            if(intention.getDate()!=null)
+                intentionObj.setDate(intention.getDate());
+
+            if(intention.getText()!=null)
+                intentionObj.setText(intention.getText());
+
+            intentionObj.setUser(intention.getUser());
+            intentionRepository.save(intentionObj);
+        }
+        return intentionObj;
+    }
+
+    @Override
     public Optional<Intention> findById(UUID id) {
         return intentionRepository.findById(id);
     }
 
     @Override
     public void delete(UUID id) {
-        intentionRepository.deleteById(id);
+        boolean exist = intentionRepository.existsById(id);
+        if(exist)
+            intentionRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Intention> intentionBetweenToDates(Timestamp first, Timestamp second) {
+        return intentionRepository.findBetweenTwoDates(first, second);
     }
 }

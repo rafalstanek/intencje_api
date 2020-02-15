@@ -25,7 +25,7 @@ public class Intention {
     private Timestamp date;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Customer user;
 
     public Intention(String text, Timestamp date, Customer user) {
