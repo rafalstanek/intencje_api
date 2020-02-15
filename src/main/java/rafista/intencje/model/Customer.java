@@ -1,15 +1,12 @@
 package rafista.intencje.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-
 import javax.persistence.*;
-
 
 @Entity
 @Data
-@Table(name = "USER")
-public class User {
+@Table(name = "CUSTOMER")
+public class Customer {
 
     @Id
     @Column(name = "ID")
@@ -22,8 +19,8 @@ public class User {
     @Column(name = "LASTNAME")
     private String lastName;
 
-    @Column(name = "LOGIN")
-    private String login;
+    @Column(name = "USERNAME")
+    private String username;
 
     @Column(name = "PASSWORD")
     private String password;
@@ -31,14 +28,14 @@ public class User {
     @Column(name = "TOKEN")
     private String token;
 
-    public User(String firstName, String lastName, String login, String password) {
+    public Customer(String firstName, String lastName, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.login = login;
+        this.username = username;
         this.password = password;
     }
 
-    public User(){
+    public Customer(){
 
     }
 
@@ -74,12 +71,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getLogin() {
-        return login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
@@ -90,5 +87,15 @@ public class User {
         this.password = password;
     }
 
-
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", token='" + token + '\'' +
+                '}';
+    }
 }

@@ -1,29 +1,24 @@
 package rafista.intencje.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import rafista.intencje.service.UserService;
+import rafista.intencje.model.Customer;
+import rafista.intencje.service.CustomerService;
 
 @RestController
 public class TokenController {
 
     @Autowired
-    private UserService userService;
+    private CustomerService customerService;
 
     @PostMapping("/token")
-    public String getToken(@RequestParam("username") final String username, @RequestParam("password") final String password) {
-        String token = "";
-        if (userService.login(username, password) != null) {
-            token = userService.login(username, password).getToken();
-            System.out.println();
-            if (StringUtils.isEmpty(token)) {
-                return "no token found";
-            }
+    public Customer getToken(@RequestParam("username") final String username, @RequestParam("password") final String password) {
+        Customer user = customerService.login(username, password);
+        if (user != null) {
+            return user;
         }
-
-        return token;
+        return null;
     }
 }

@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.UUID;
 
 @Entity
 @Data
@@ -24,9 +23,9 @@ public class Intention {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    private Customer user;
 
-    public Intention(String text, Timestamp date, User user) {
+    public Intention(String text, Timestamp date, Customer user) {
         this.text = text;
         this.date = date;
         this.user = user;
@@ -58,11 +57,11 @@ public class Intention {
         this.date = date;
     }
 
-    public User getUser() {
+    public Customer getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Customer user) {
         this.user = user;
     }
 }
