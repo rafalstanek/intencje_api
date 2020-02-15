@@ -30,18 +30,7 @@ public class DataSourceConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/h2/**").permitAll();
 
-        http.csrf()
-                .disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-                .httpBasic();
-
+        http .csrf().disable() .authorizeRequests() .anyRequest().permitAll();
         http.headers().frameOptions().sameOrigin();
-
     }
-
-
 }
