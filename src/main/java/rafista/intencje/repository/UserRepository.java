@@ -10,8 +10,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, UUID> {
-    Optional<User> findById(UUID id);
+public interface UserRepository extends CrudRepository<User, Long> {
+    Optional<User> findById(long id);
 
     @Query(value = "SELECT * FROM USER u where u.LOGIN = :username and u.PASSWORD = :password ",  nativeQuery = true)
     User login(String username,String password);

@@ -31,12 +31,12 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public Optional<User> findById(UUID id) {
+    public Optional<User> findById(long id) {
         return userRepository.findById(id);
     }
 
     @Override
-    public void delete(UUID id) {
+    public void delete(long id) {
         userRepository.deleteById(id);
     }
 
@@ -58,6 +58,14 @@ public class UserService implements UserServiceInterface {
         Optional<User> user = userRepository.findByToken(token);
         if(user!=null){
           return user;
+        }
+        return null;
+    }
+
+    public User create(User user){
+        if(!userRepository.existsById(user.getId())){
+            userRepository.save(user);
+            return user;
         }
         return null;
     }

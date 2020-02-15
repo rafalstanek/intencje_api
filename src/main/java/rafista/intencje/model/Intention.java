@@ -14,7 +14,7 @@ public class Intention {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private long id;
 
     @Column(name = "TEXT")
     private String text;
@@ -32,11 +32,13 @@ public class Intention {
         this.user = user;
     }
 
-    public UUID getId() {
+    public Intention(){}
+
+    public long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(long id) {
         this.id = id;
     }
 

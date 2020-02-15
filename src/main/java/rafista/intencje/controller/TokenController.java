@@ -14,11 +14,16 @@ public class TokenController {
     private UserService userService;
 
     @PostMapping("/token")
-    public String getToken(@RequestParam("username") final String username, @RequestParam("password") final String password){
-        String token= userService.login(username,password).getToken();
-        if(StringUtils.isEmpty(token)){
-            return "no token found";
+    public String getToken(@RequestParam("username") final String username, @RequestParam("password") final String password) {
+        String token = "";
+        if (userService.login(username, password) != null) {
+            token = userService.login(username, password).getToken();
+            System.out.println();
+            if (StringUtils.isEmpty(token)) {
+                return "no token found";
+            }
         }
+
         return token;
     }
 }

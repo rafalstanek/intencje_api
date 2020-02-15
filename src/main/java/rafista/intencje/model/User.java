@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.UUID;
+
 
 @Entity
 @Data
@@ -14,7 +14,7 @@ public class User {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private long id;
 
     @Column(name = "FIRSTNAME")
     private String firstName;
@@ -26,7 +26,6 @@ public class User {
     private String login;
 
     @Column(name = "PASSWORD")
-    @JsonIgnore
     private String password;
 
     @Column(name = "TOKEN")
@@ -39,6 +38,10 @@ public class User {
         this.password = password;
     }
 
+    public User(){
+
+    }
+
     public String getToken() {
         return token;
     }
@@ -47,11 +50,11 @@ public class User {
         this.token = token;
     }
 
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -86,4 +89,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
 }

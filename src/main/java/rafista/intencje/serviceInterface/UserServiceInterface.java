@@ -14,9 +14,9 @@ public interface UserServiceInterface {
 
     List<User> findAll();
 
-    Optional<User> findById(UUID id);
+    Optional<User> findById(long id);
 
-    void delete(UUID id);
+    void delete(long id);
 
    User login(String username, String password);
 
