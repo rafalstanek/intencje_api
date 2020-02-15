@@ -1,9 +1,11 @@
 package rafista.intencje.model;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -11,14 +13,15 @@ import java.sql.Timestamp;
 public class Intention {
 
     @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "ID", columnDefinition = "VARCHAR(255)")
+    private UUID id;
 
-    @Column(name = "TEXT")
+    @Column(name = "TEXT", nullable=false)
     private String text;
 
-    @Column(name = "DATE")
+    @Column(name = "DATE", nullable=false)
     private Timestamp date;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -33,11 +36,11 @@ public class Intention {
 
     public Intention(){}
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -64,4 +67,6 @@ public class Intention {
     public void setUser(Customer user) {
         this.user = user;
     }
+
+
 }

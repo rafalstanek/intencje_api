@@ -54,23 +54,23 @@ public class CustomerService implements CustomerServiceInterface {
         return null;
     }
 
-//    @Override
-//    public Optional<User> findByToken(String token) {
-//        Optional<Customer> customer= customerRepository.findByToken(token);
-//        if(customer.isPresent()){
-//            Customer customer1 = customer.get();
-//            User user= new User(customer1.getUsername(), customer1.getPassword(), true, true, true, true,
-//                    AuthorityUtils.createAuthorityList("USER"));
-//            return Optional.of(user);
-//        }
-//        return  Optional.empty();
-//    }
-
-    public Customer create(Customer user){
-        if(!customerRepository.existsById(user.getId())){
-            customerRepository.save(user);
-            return user;
+    @Override
+    public Optional<User> findByToken(String token) {
+        Optional<Customer> customer= customerRepository.findByToken(token);
+        if(customer.isPresent()){
+            Customer customer1 = customer.get();
+            User user= new User(customer1.getUsername(), customer1.getPassword(), true, true, true, true,
+                    AuthorityUtils.createAuthorityList("USER"));
+            return Optional.of(user);
         }
-        return null;
+        return  Optional.empty();
     }
+
+//    public Customer create(Customer user){
+//        if(!customerRepository.existsById(user.getId())){
+//            customerRepository.save(user);
+//            return user;
+//        }
+//        return null;
+//    }
 }

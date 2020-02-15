@@ -20,6 +20,6 @@ public interface CustomerServiceInterface {
 
    Customer login(String username, String password);
 
-  //  Optional<User> findByToken(String token);
+   Optional<User> findByToken(String token);
 
 }

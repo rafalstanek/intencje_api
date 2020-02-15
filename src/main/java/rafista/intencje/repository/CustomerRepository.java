@@ -11,8 +11,8 @@ import java.util.Optional;
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
     Optional<Customer> findById(long id);
 
-    @Query(value = "SELECT * FROM USER u where u.USERNAME = :username and u.PASSWORD = :password ",  nativeQuery = true)
+    @Query(value = "SELECT * FROM CUSTOMER u where u.USERNAME = :username and u.PASSWORD = :password ",  nativeQuery = true)
     Optional<Customer> login(String username, String password);
 
-   // Optional<Customer> findByToken(String token);
+   Optional<Customer> findByToken(String token);
 }

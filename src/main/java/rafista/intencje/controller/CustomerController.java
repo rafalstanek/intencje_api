@@ -26,7 +26,7 @@ public class CustomerController {
 
    @PostMapping(produces = "application/json")
     public Customer addUser(@RequestBody Customer user){
-        return customerService.create(user);
+        return customerService.save(user);
     }
 
 }
