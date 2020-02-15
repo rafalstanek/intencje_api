@@ -6,13 +6,17 @@ import org.springframework.stereotype.Repository;
 import rafista.intencje.model.Customer;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface CustomerRepository extends CrudRepository<Customer, Long> {
-    Optional<Customer> findById(long id);
+public interface CustomerRepository extends CrudRepository<Customer, UUID> {
+    Optional<Customer> findById(UUID id);
 
     @Query(value = "SELECT * FROM CUSTOMER u where u.USERNAME = :username and u.PASSWORD = :password ",  nativeQuery = true)
     Optional<Customer> login(String username, String password);
 
    Optional<Customer> findByToken(String token);
+
+    @Query(value = "SELECT * FROM CUSTOMER u where u.USERNAME = :username",  nativeQuery = true)
+    Customer findByUsername(String username);
 }

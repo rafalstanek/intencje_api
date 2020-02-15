@@ -1,7 +1,10 @@
 package rafista.intencje.model;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -9,20 +12,21 @@ import javax.persistence.*;
 public class Customer {
 
     @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "ID", columnDefinition = "VARCHAR(255)")
+    private UUID id;
 
-    @Column(name = "FIRSTNAME")
+    @Column(name = "FIRSTNAME", nullable = false)
     private String firstName;
 
-    @Column(name = "LASTNAME")
+    @Column(name = "LASTNAME", nullable = false)
     private String lastName;
 
-    @Column(name = "USERNAME")
+    @Column(name = "USERNAME", nullable = false)
     private String username;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
     @Column(name = "TOKEN")
@@ -35,10 +39,13 @@ public class Customer {
         this.password = password;
     }
 
+    public Customer(UUID id){
+      this.id = id;
+    }
+
     public Customer(){
 
     }
-
     public String getToken() {
         return token;
     }
@@ -47,11 +54,11 @@ public class Customer {
         this.token = token;
     }
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

@@ -21,7 +21,10 @@ public class CustomerService implements CustomerServiceInterface {
 
     @Override
     public Customer save(Customer user) {
-        return customerRepository.save(user);
+        if(customerRepository.findByUsername(user.getUsername())==null)
+            return customerRepository.save(user);
+        else
+            return null;
     }
 
     @Override
@@ -32,12 +35,12 @@ public class CustomerService implements CustomerServiceInterface {
     }
 
     @Override
-    public Optional<Customer> findById(long id) {
+    public Optional<Customer> findById(UUID id) {
         return customerRepository.findById(id);
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(UUID id) {
         customerRepository.deleteById(id);
     }
 
@@ -65,7 +68,6 @@ public class CustomerService implements CustomerServiceInterface {
         }
         return  Optional.empty();
     }
-
 //    public Customer create(Customer user){
 //        if(!customerRepository.existsById(user.getId())){
 //            customerRepository.save(user);

@@ -6,6 +6,7 @@ import rafista.intencje.model.Customer;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public interface CustomerServiceInterface {
@@ -14,9 +15,9 @@ public interface CustomerServiceInterface {
 
     List<Customer> findAll();
 
-    Optional<Customer> findById(long id);
+    Optional<Customer> findById(UUID id);
 
-    void delete(long id);
+    void delete(UUID id);
 
    Customer login(String username, String password);
 

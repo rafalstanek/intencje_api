@@ -7,6 +7,7 @@ import rafista.intencje.service.CustomerService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/user")
@@ -15,7 +16,7 @@ public class CustomerController {
     CustomerService customerService;
 
     @GetMapping(value = "/{id}",produces = "application/json")
-    public Optional<Customer> getUserDetail(@PathVariable long id){
+    public Optional<Customer> getUserDetail(@PathVariable UUID id){
         return customerService.findById(id);
     }
 
@@ -25,8 +26,13 @@ public class CustomerController {
     }
 
    @PostMapping(produces = "application/json")
+   @ResponseBody
     public Customer addUser(@RequestBody Customer user){
-        return customerService.save(user);
+        Customer customer = customerService.save(user);
+        if (customer!=null)
+            return customer;
+        else
+            return new Customer(null);
     }
 
 }

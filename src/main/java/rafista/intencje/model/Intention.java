@@ -18,14 +18,14 @@ public class Intention {
     @Column(name = "ID", columnDefinition = "VARCHAR(255)")
     private UUID id;
 
-    @Column(name = "TEXT", nullable=false)
+    @Column(name = "TEXT", nullable = false)
     private String text;
 
-    @Column(name = "DATE", nullable=false)
+    @Column(name = "DATE", nullable = false)
     private Timestamp date;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private Customer user;
 
     public Intention(String text, Timestamp date, Customer user) {
