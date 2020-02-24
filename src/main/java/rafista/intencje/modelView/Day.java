@@ -4,9 +4,8 @@ import rafista.intencje.model.Intention;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Day {
 
@@ -50,6 +49,14 @@ public class Day {
 
     public void addIntention(Intention intention){
         this.intentionList.add(intention);
+        if (this.intentionList.size() > 0) {
+            Collections.sort(this.intentionList, new Comparator<Intention>() {
+                @Override
+                public int compare(final Intention object1, final Intention object2) {
+                    return object1.getDate().compareTo(object2.getDate());
+                }
+            });
+        }
     }
 
     @Override
