@@ -2,6 +2,7 @@ package rafista.intencje.serviceInterface;
 
 import org.springframework.stereotype.Service;
 import rafista.intencje.model.Intention;
+import rafista.intencje.modelView.Day;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -16,5 +17,5 @@ public interface IntentionServiceInterface {
     Intention edit(UUID id, Intention intention);
    Optional<Intention> findById(UUID id);
     void delete(UUID id);
-    List<Intention> intentionBetweenToDates(Timestamp first, Timestamp second);
+    List<Day> intentionBetweenToDates(Timestamp first, Timestamp second);
 }

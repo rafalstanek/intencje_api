@@ -3,6 +3,7 @@ package rafista.intencje.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import rafista.intencje.model.Intention;
+import rafista.intencje.modelView.Day;
 import rafista.intencje.service.IntentionService;
 
 import java.sql.Timestamp;
@@ -21,7 +22,7 @@ public class IntentionController {
     }
 
     @GetMapping(value="/between", produces = "application/json")
-    public List<Intention> getByTwoDates(@RequestParam("first") final Timestamp first, @RequestParam("second") final Timestamp second){
+    public List<Day> getByTwoDates(@RequestParam("first") final Timestamp first, @RequestParam("second") final Timestamp second){
         return intentionService.intentionBetweenToDates(first, second);
     }
 

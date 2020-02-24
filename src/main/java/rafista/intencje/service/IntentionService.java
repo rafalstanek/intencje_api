@@ -65,7 +65,7 @@ public class IntentionService implements IntentionServiceInterface {
     }
 
     @Override
-    public List<Intention> intentionBetweenToDates(Timestamp first, Timestamp second) {
+    public List<Day> intentionBetweenToDates(Timestamp first, Timestamp second) {
         List<Intention> intentionList = intentionRepository.findBetweenTwoDates(first, second);
         List<Day> dayList = new ArrayList<>();
         LocalDateTime date = null;
@@ -90,10 +90,10 @@ public class IntentionService implements IntentionServiceInterface {
 
         }
 
-        for (Day days: dayList) {
-            System.out.println(days.toString());
-        }
-        return intentionList;
+//        for (Day days: dayList) {
+//            System.out.println(days.toString());
+//        }
+        return dayList;
     }
 
     private String dayOfWeek(int day) {
