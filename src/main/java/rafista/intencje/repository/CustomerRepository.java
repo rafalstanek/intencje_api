@@ -12,8 +12,8 @@ import java.util.UUID;
 public interface CustomerRepository extends CrudRepository<Customer, UUID> {
     Optional<Customer> findById(UUID id);
 
-    @Query(value = "SELECT * FROM CUSTOMER u where u.USERNAME = :username and u.PASSWORD = :password ",  nativeQuery = true)
-    Optional<Customer> login(String username, String password);
+    @Query(value = "SELECT * FROM CUSTOMER u where u.USERNAME = :username",  nativeQuery = true)
+    Optional<Customer> login(String username);
 
    Optional<Customer> findByToken(String token);
 

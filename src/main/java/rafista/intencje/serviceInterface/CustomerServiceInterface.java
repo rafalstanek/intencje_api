@@ -13,6 +13,8 @@ public interface CustomerServiceInterface {
 
     Customer save(Customer user);
 
+   Customer edit(UUID id, String newPassword, String oldPassword);
+
     List<Customer> findAll();
 
     Optional<Customer> findById(UUID id);

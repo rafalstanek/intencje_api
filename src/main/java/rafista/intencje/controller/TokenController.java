@@ -1,9 +1,10 @@
 package rafista.intencje.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import rafista.intencje.model.Customer;
 import rafista.intencje.service.CustomerService;
 
@@ -13,12 +14,12 @@ public class TokenController {
     @Autowired
     private CustomerService customerService;
 
-    @PostMapping("/token")
-    public Customer getToken(@RequestParam("username") final String username, @RequestParam("password") final String password) {
+    @GetMapping(value="/token", produces = "application/json")
+    public ResponseEntity getToken(@RequestParam("username") final String username, @RequestParam("password") final String password) {
         Customer user = customerService.login(username, password);
         if (user != null) {
-            return user;
+            return new ResponseEntity(user, new HttpHeaders(), HttpStatus.CREATED);
         }
-        return null;
+        return new ResponseEntity("error", new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
 }

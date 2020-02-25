@@ -17,10 +17,10 @@ public class Customer {
     @Column(name = "ID", columnDefinition = "VARCHAR(255)")
     private UUID id;
 
-    @Column(name = "FIRSTNAME", nullable = false)
+    @Column(name = "FIRSTNAME", nullable = true)
     private String firstName;
 
-    @Column(name = "LASTNAME", nullable = false)
+    @Column(name = "LASTNAME", nullable = true)
     private String lastName;
 
     @Column(name = "USERNAME", nullable = false)
@@ -36,6 +36,9 @@ public class Customer {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
+        this.password = password;
+    }
+    public Customer(String password) {
         this.password = password;
     }
 

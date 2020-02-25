@@ -7,6 +7,7 @@ import rafista.intencje.modelView.Day;
 import rafista.intencje.service.IntentionService;
 
 import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,27 +18,35 @@ public class IntentionController {
     IntentionService intentionService;
 
     @PostMapping(produces = "application/json")
-    public Intention add(@RequestBody Intention intention){
+    public Intention add(@RequestBody Intention intention) {
         return intentionService.save(intention);
     }
 
-    @GetMapping(value="/between", produces = "application/json")
-    public List<Day> getByTwoDates(@RequestParam("first") final Timestamp first, @RequestParam("second") final Timestamp second){
+    @GetMapping(value = "/between", produces = "application/json")
+    public List<Day> getByTwoDates(@RequestParam("first") final Timestamp first, @RequestParam("second") final Timestamp second) {
         return intentionService.intentionBetweenToDates(first, second);
     }
 
     @GetMapping(produces = "application/json")
-    public List<Intention> getAll(){
+    public List<Intention> getAll() {
         return intentionService.findAll();
     }
 
-    @PutMapping(value="/{id}", produces = "application/json")
-    public Intention edit(@PathVariable UUID id, @RequestBody Intention intention){
+    @GetMapping(value = "/week", produces = "application/json")
+    public List<Day> getNextWeek() {
+        Timestamp start = new Timestamp(System.currentTimeMillis());
+        start = Timestamp.valueOf(start.toLocalDateTime().format(DateTimeFormatter.ISO_DATE) + " 00:00:00");
+        Timestamp end = Timestamp.valueOf(start.toLocalDateTime().plusDays(7).format(DateTimeFormatter.ISO_DATE)+" 00:00:00");
+        return intentionService.intentionBetweenToDates(start, end);
+    }
+
+    @PutMapping(value = "/{id}", produces = "application/json")
+    public Intention edit(@PathVariable UUID id, @RequestBody Intention intention) {
         return intentionService.edit(id, intention);
     }
 
-    @DeleteMapping(value="/{id}", produces = "application/json")
-    public void delete(@PathVariable UUID id){
+    @DeleteMapping(value = "/{id}", produces = "application/json")
+    public void delete(@PathVariable UUID id) {
         intentionService.delete(id);
     }
 }

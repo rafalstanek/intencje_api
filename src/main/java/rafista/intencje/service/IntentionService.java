@@ -12,10 +12,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAmount;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service(value = "intentionService")
 public class IntentionService implements IntentionServiceInterface {
@@ -90,9 +87,15 @@ public class IntentionService implements IntentionServiceInterface {
 
         }
 
-//        for (Day days: dayList) {
-//            System.out.println(days.toString());
-//        }
+        if (dayList.size() > 0) {
+           dayList.sort(new Comparator<Day>() {
+               @Override
+               public int compare(Day o1, Day o2) {
+                   return o1.getDate().compareTo(o2.getDate());
+               }
+           });
+        }
+
         return dayList;
     }
 

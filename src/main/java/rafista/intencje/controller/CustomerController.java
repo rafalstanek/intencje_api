@@ -25,13 +25,18 @@ public class CustomerController {
         return customerService.findAll();
     }
 
+    @PutMapping(value ="/{id}", produces = "application/json")
+    public Customer editUser(@PathVariable UUID id, @RequestParam(name = "newPassword", required = true) String newPassword ,@RequestParam(name = "oldPassword", required = true) String oldPassword){
+        return customerService.edit(id, newPassword, oldPassword);
+    }
+
    @PostMapping(produces = "application/json")
     public Customer addUser(@RequestBody Customer user){
         Customer customer = customerService.save(user);
         if (customer!=null)
             return customer;
         else
-            return new Customer(null);
+            return new Customer((UUID) null);
     }
 
 }

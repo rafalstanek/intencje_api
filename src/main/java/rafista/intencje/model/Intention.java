@@ -18,7 +18,7 @@ public class Intention {
     @Column(name = "ID", columnDefinition = "VARCHAR(255)")
     private UUID id;
 
-    @Column(name = "TEXT", nullable = false)
+    @Column(name = "TEXT", nullable = true)
     private String text;
 
     @Column(name = "DATE", nullable = false)
