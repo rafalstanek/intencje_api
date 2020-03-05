@@ -41,7 +41,7 @@ public class CustomerService implements CustomerServiceInterface {
                return customerObj;
            }
        }
-       return null;
+       return new Customer();
     }
 
     @Override

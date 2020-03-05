@@ -1,6 +1,8 @@
 package rafista.intencje.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rafista.intencje.model.Intention;
 import rafista.intencje.modelView.Day;
@@ -9,6 +11,7 @@ import rafista.intencje.service.IntentionService;
 import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -45,8 +48,14 @@ public class IntentionController {
         return intentionService.edit(id, intention);
     }
 
+    @GetMapping(value = "/{id}", produces = "application/json")
+    public Optional<Intention> getOne(@PathVariable UUID id) {
+        return intentionService.findById(id);
+    }
+
     @DeleteMapping(value = "/{id}", produces = "application/json")
-    public void delete(@PathVariable UUID id) {
-        intentionService.delete(id);
+    public ResponseEntity<String> delete(@PathVariable UUID id) {
+        return new ResponseEntity<>(
+                intentionService.delete(id), HttpStatus.OK);
     }
 }

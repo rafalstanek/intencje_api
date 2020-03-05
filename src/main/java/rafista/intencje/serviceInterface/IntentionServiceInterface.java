@@ -16,6 +16,6 @@ public interface IntentionServiceInterface {
     Intention save(Intention intention);
     Intention edit(UUID id, Intention intention);
    Optional<Intention> findById(UUID id);
-    void delete(UUID id);
+    String delete(UUID id);
     List<Day> intentionBetweenToDates(Timestamp first, Timestamp second);
 }

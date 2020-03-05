@@ -55,10 +55,15 @@ public class IntentionService implements IntentionServiceInterface {
     }
 
     @Override
-    public void delete(UUID id) {
+    public String delete(UUID id) {
         boolean exist = intentionRepository.existsById(id);
-        if (exist)
+        if (exist){
             intentionRepository.deleteById(id);
+            return "ok";
+        }
+        else{
+            return "error";
+        }
     }
 
     @Override
