@@ -1,6 +1,8 @@
 package rafista.intencje.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rafista.intencje.model.Customer;
 import rafista.intencje.service.CustomerService;
@@ -14,6 +16,12 @@ import java.util.UUID;
 public class CustomerController {
     @Autowired
     CustomerService customerService;
+
+    @GetMapping(value = "/status", produces = "application/json")
+    public ResponseEntity<String> checkStatus() {
+        return new ResponseEntity<>(
+                "ok", HttpStatus.OK);
+    }
 
     @GetMapping(value = "/{id}",produces = "application/json")
     public Optional<Customer> getUserDetail(@PathVariable UUID id){
